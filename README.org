@@ -1,0 +1,69 @@
+* Screenshots
+** Home / Recipe List page
+[[./screenshots/home.png]]
+
+** Share a Recipe page
+[[./screenshots/share.png]]
+
+** Recipe Detail page
+[[./screenshots/detail.png]]
+
+* About
+A recipe sharing application built with Django. This project was the
+internship application [[file:Backend_Exercise_v3.1.pdf][project]] of [[https://hipolabs.com/][Hipo]] in 2019.
+
+** Project Details
+- In this project, users will share and search recipes. For example,
+  someone who cook delicious ​Ratatouille​, may share it’s recipe. Also,
+  someone who would like to cook a dish, may search a recipe.
+- Only registered users can share, like and rate recipe. Anonymous users
+  can only consume the content.
+- The website stores users, recipes, ingredients, likes and ratings
+  in PostgreSQL database and display most used 5 ingredients at the right
+  side of the page.
+- Recipes in homepage ordered by creation time.
+- Ingredients in sidebar goes to list of recipes the ingredient used.
+
+
+* Installation
+Clone this repository:
+
+#+begin_src bash
+  $ git clone https://github.com/KaratasFurkan/Recipe-Sharing-App.git
+#+end_src
+
+Create and activate a virtual environment in the project folder:
+
+#+begin_src bash
+  $ python -m venv env
+  $ source env/bin/activate
+#+end_src
+
+Install the requirements:
+
+#+begin_src bash
+  $ pip install -r requirements.txt
+#+end_src
+
+Create database
+
+#+begin_src bash
+  $ sudo -u postgres psql
+  postgres=# CREATE DATABASE recipes;
+#+end_src
+
+Migrate database
+
+#+begin_src bash
+  $ python manage.py migrate
+#+end_src
+
+* Usage
+
+To start server, run this command in the project directory:
+
+#+begin_src bash
+  $ python manage.py runserver
+#+end_src
+
+Open [[http://localhost:8000]] to view it in the browser.

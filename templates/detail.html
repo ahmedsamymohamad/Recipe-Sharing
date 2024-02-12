@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ recipe.name }}</h2>
+
+  <p>
+    <img class="mb-1" alt="knife" src="{% static "img/knife.png" %}"/>
+    {{ recipe.created_by }}
+    <img class="mb-1" alt="muscle" src="{% static "img/muscle.png" %}"/>
+    {{ recipe.get_difficulty_display }}
+    <img class="mb-1" alt="clock" src="{% static "img/clock.png" %}"/>
+    {{ recipe.created_at|date:"j/n/Y" }}
+  </p>
+
+  <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+
+  <form method="post" action={% url "like" recipe_pk=recipe.pk %} novalidate class="mb-3">
+    {% csrf_token %}
+    {% if is_liked %}
+      <button type="submit" class="btn btn-success">Like ({{ recipe.like_set.count }})</button>
+    {% else %}
+      <button type="submit" class="btn btn-primary">Like ({{ recipe.like_set.count }})</button>
+    {% endif %}
+  </form>
+
+  <h4>Ingredients</h4>
+  <ul>
+    {% for ingredient in recipe.ingredients.all %}
+      <li>{{ ingredient.name }}</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Description</h4>
+  <p>{{ recipe.description }}</p>
+
+  <form method="post" action={% url "rate" recipe_pk=recipe.pk %} novalidate class="mb-3">
+    {% csrf_token %}
+    {% render_field rate_form.rate class="custom-select" style="width:auto"%}
+    {% if is_rated %} <!--TODO: display given rate as selected-->
+      <button type="submit" class="btn btn-success">Rate</button>
+    {% else %}
+      <button type="submit" class="btn btn-primary">Rate</button>
+    {% endif %}
+  </form>
+
+  {% if recipe.created_by == user %}
+    <a href="{% url "edit" recipe.pk %}" class="btn btn-primary btn-md mb-3" role="button">Edit</a>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row mt-4">
+      <div class="col-9">
+        {% for recipe in recipes %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <h2 class="card-title">
+                <a class="text-dark" href="{% url 'detail' recipe.pk %}">{{ recipe.name }}</a>
+              </h2>
+              <a href="{% url 'detail' recipe.pk %}">
+                <img class="img-fluid mb-3" style="max-height:200px" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+              </a>
+              <p class="card-text">{{ recipe.description }}</p>
+              <p class="mb-0">{{ recipe.created_at|date:"j/n/Y" }} · {{ recipe.get_avg_rate }}/5 ({{ recipe.rate_set.count }} Votes) ·  {{ recipe.like_set.count }} likes · by {{ recipe.created_by }}
+                {% if recipe.created_by == user %}
+                  · <a href="{% url "edit" recipe.pk %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                {% endif %}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+        {% include 'includes/pagination.html' %}
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Search</h3>
+            <form method="get" action={% url "search" %} novalidate>
+              <div class="input-group mt-3">
+                <input name="search" type="text" class="form-control" placeholder="recipe, ingredient..">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <h3 class="card-title">Top Used Ingredients</h3>
+            <ul>
+              {% for ingredient in ingredients %}
+                <li>
+                  <a href="{% url 'recipes' ingredient.pk %}">{{ ingredient.name }} ({{ ingredient.recipe_count }})</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

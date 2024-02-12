@@ -1,0 +1,9 @@
+django==3.0.7
+django-extensions==2.2.8
+django-widget-tweaks==1.4.5
+pillow==7.0.0
+psycopg2==2.8.4
+# asgiref==3.2.3 # Installed as dependency for django
+# pytz==2019.3 # Installed as dependency for django
+# sqlparse==0.3.0 # Installed as dependency for django
+# six==1.14.0 # Installed as dependency for django-extensions
