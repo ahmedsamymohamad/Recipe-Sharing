@@ -137,4 +137,4 @@ LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "login"
 
 # allowed hosts
-ALLOWED_HOSTS = ['recpie-share.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','recpie-share.onrender.com']

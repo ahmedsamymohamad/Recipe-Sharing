@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Recipe
+from .models import Recipe,Ingredient
 
 
 class RecipeForm(forms.ModelForm):
@@ -8,11 +8,16 @@ class RecipeForm(forms.ModelForm):
         # NOTE: styling in css probably would be a better practice
         widget=forms.Textarea(attrs={"style": "resize:none;"})
     )
-
+    
     class Meta:
         model = Recipe
         fields = ["name", "image", "description", "difficulty", "ingredients"]
-        help_texts = {
-            "ingredients": "Select Ingredients  (Hold down the Ctrl (windows/linux)"
-            " / Command (Mac) button to select multiple options.)",
-        }
+        # help_texts = {
+        #     "ingredients": "Select Ingredients  (Hold down the Ctrl (windows/linux)"
+        #     " / Command (Mac) button to select multiple options.)",
+        # }
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields=['name']

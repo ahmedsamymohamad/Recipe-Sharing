@@ -3,10 +3,31 @@
 {% block title %}Share a Recipe{% endblock %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data" novalidate>
+  <form method="post" id="form" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
+    <div class="mb-3">
+      <a href="{% url 'ingredients' %}" class="btn btn-primary">Add  Ingredient</a>
+    </div>
     <button type="submit" class="btn btn-success">Share</button>
-    <a href="{% url "home" %}" class="btn btn-light">Cancel</a>
+    <a href="{% url 'home' %}" class="btn btn-light">Cancel</a>
   </form>
+  <script>
+    var ingredientBtn = document.getElementById("addIngredient");
+    var newIngredientField = document.getElementById("newIngredient");
+    var selectIngredients = document.getElementById("id_ingredients");
+    
+    var i = 1;
+    ingredientBtn.addEventListener('click', (event) => {
+      event.preventDefault(); 
+      var newIngredientText = newIngredientField.value; // Get the value of the input field
+      var newOption = document.createElement('option');
+      //newOption.setAttribute('selected', true);
+      newOption.setAttribute('value', i++);
+
+      newOption.textContent = newIngredientText; 
+      selectIngredients.appendChild(newOption); 
+       newIngredientField.value = '';
+    });
+  </script>
 {% endblock %}

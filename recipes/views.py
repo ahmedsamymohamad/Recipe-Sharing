@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from interactions.forms import RateForm
 from interactions.models import Like, Rate
 
-from .forms import RecipeForm
+from .forms import RecipeForm,IngredientForm
 from .models import Ingredient, Recipe
 
 
@@ -34,6 +34,17 @@ class ShareView(CreateView):
     form_class = RecipeForm
     success_url = reverse_lazy("home")
     template_name = "share.html"
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+    
+@method_decorator(login_required, name="dispatch")
+class IngredientView(CreateView):
+    model = Ingredient
+    form_class = IngredientForm
+    success_url = reverse_lazy("home")
+    template_name = "ingredient.html"
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -115,3 +126,4 @@ class SearchView(RecipeListView):
         else:
             obj_list = self.model.objects.all().order_by("-created_at")
         return obj_list
+    

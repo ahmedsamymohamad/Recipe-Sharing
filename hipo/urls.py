@@ -50,4 +50,5 @@ urlpatterns = [
         recipes_views.RecipeUpdateView.as_view(),
         name="edit",
     ),
+    path('addIngredient/',recipes_views.IngredientView.as_view(),name='ingredients')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
