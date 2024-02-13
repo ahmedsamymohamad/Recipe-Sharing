@@ -1,6 +1,7 @@
 django
 django-extensions
 django-widget-tweaks
+python-dotenv
 pillow
 psycopg2
 # asgiref==3.2.3 # Installed as dependency for django
