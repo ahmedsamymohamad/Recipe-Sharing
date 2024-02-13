@@ -12,10 +12,10 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ["name", "image", "description", "difficulty", "ingredients"]
-        # help_texts = {
-        #     "ingredients": "Select Ingredients  (Hold down the Ctrl (windows/linux)"
-        #     " / Command (Mac) button to select multiple options.)",
-        # }
+        help_texts = {
+            "ingredients": "Select Ingredients  (Hold down the Ctrl (windows/linux)"
+            " / Command (Mac) button to select multiple options.)",
+        }
 
 class IngredientForm(forms.ModelForm):
     class Meta:
