@@ -5,7 +5,7 @@ from django.db.models import Avg
 
 class Recipe(models.Model):
     name = models.CharField(max_length=30)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images/')
     description = models.TextField(max_length=4000)
     ingredients = models.ManyToManyField("Ingredient")
 
