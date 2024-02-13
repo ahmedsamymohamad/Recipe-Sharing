@@ -4,6 +4,7 @@ django-widget-tweaks
 python-dotenv
 pillow
 psycopg2
+gunicorn
 # asgiref==3.2.3 # Installed as dependency for django
 # pytz==2019.3 # Installed as dependency for django
 # sqlparse==0.3.0 # Installed as dependency for django
