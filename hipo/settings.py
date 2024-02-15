@@ -140,4 +140,6 @@ LOGIN_URL = "login"
 DEBUG = os.environ.get('DEBUG') != 'True'
 
 # allowed hosts
-ALLOWED_HOSTS = ['127.0.0.1','.onrender.com','.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'https://recpie-share.onrender.com/',
+                 'https://recipe-sharing-yfs5kwh6n-ahmed-samys-projects-753187b5.vercel.app']
