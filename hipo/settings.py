@@ -140,4 +140,4 @@ LOGIN_URL = "login"
 DEBUG = os.environ.get('DEBUG') != 'True'
 
 # allowed hosts
-ALLOWED_HOSTS = ['127.0.0.1','recpie-share.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','.onrender.com','.vercel.app']
