@@ -50,5 +50,13 @@ urlpatterns = [
         recipes_views.RecipeUpdateView.as_view(),
         name="edit",
     ),
-    path('addIngredient/',recipes_views.IngredientView.as_view(),name='ingredients')
+    path(
+        "ingredient/<int:ingredient_pk>/edit/",
+        recipes_views.IngredientUpdateView.as_view(),
+        name="edit_ingredient",
+    ),
+    path('add-ingredient/',recipes_views.IngredientView.as_view(),name='add_ingredient'),
+    path('recipe/<int:recipe_pk>/delete/', recipes_views.RecipeDeleteView.as_view(), name='recipe_delete'),
+    path('ingredient/<int:ingredient_pk>/delete/', recipes_views.IngredientDeleteView.as_view(), name='delete_ingredient'),
+    path('ingredients/', recipes_views.IngredientListView.as_view(), name='ingredients'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -17,6 +17,8 @@
               <p class="mb-0">{{ recipe.created_at|date:"j/n/Y" }} · {{ recipe.get_avg_rate }}/5 ({{ recipe.rate_set.count }} Votes) ·  {{ recipe.like_set.count }} likes · by {{ recipe.created_by }}
                 {% if recipe.created_by == user %}
                   · <a href="{% url "edit" recipe.pk %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                  <a href="{% url 'recipe_delete' recipe.pk %}" 
+                  class="btn btn-danger btn-sm" >Delete</a>
                 {% endif %}
               </p>
             </div>
@@ -48,6 +50,7 @@
                 </li>
               {% endfor %}
             </ul>
+            <a href="{% url 'ingredients' %}">All ingredients</a>
           </div>
         </div>
       </div>

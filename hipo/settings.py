@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from dotenv import load_dotenv
 
-load_dotenv() 
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,12 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "_)r^$59!0umbcssr2tl74&5zx57ryjk!i7#85!wzvk&%rqyr+q"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # Application definition
@@ -140,6 +136,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "/media")
 LOGOUT_REDIRECT_URL = "home"
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "login"
+
+DEBUG = os.environ.get('DEBUG') != 'True'
 
 # allowed hosts
 ALLOWED_HOSTS = ['127.0.0.1','recpie-share.onrender.com']

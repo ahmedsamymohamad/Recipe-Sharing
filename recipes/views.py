@@ -5,6 +5,9 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.utils import timezone
 from django.shortcuts import redirect
+from django.views.generic import DeleteView
+from django.http import Http404
+
 
 from interactions.forms import RateForm
 from interactions.models import Like, Rate
@@ -43,8 +46,8 @@ class ShareView(CreateView):
 class IngredientView(CreateView):
     model = Ingredient
     form_class = IngredientForm
-    success_url = reverse_lazy("home")
-    template_name = "ingredient.html"
+    success_url = reverse_lazy("ingredients")
+    template_name = "add_ingredient.html"
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -69,7 +72,20 @@ class RecipeUpdateView(UpdateView):
         recipe.save()
         form.save_m2m()
         return redirect("detail", recipe_pk=recipe.pk)
+    
+@method_decorator(login_required, name="dispatch")
+class RecipeDeleteView(DeleteView):
+    model = Recipe
+    success_url = reverse_lazy('home')
+    template_name = 'recipe_delete.html'  # Change this to your desired template name
+    pk_url_kwarg = 'recipe_pk'  # Adjust if your URL keyword is different
 
+    def get_object(self, queryset=None):
+        """Hook to ensure recipe is owned by the requesting user."""
+        obj = super().get_object()
+        if not obj.created_by == self.request.user:
+            raise Http404
+        return obj
 
 class RecipeDetailView(DetailView):
     model = Recipe
@@ -127,3 +143,49 @@ class SearchView(RecipeListView):
             obj_list = self.model.objects.all().order_by("-created_at")
         return obj_list
     
+
+class IngredientListView(ListView):
+    model = Ingredient
+    context_object_name = "ingredients"
+    template_name = "ingredients.html"
+    
+    def get_queryset(self):
+        return (
+            Ingredient.objects.all().order_by("-created_at")
+        )
+
+
+@method_decorator(login_required, name="dispatch")
+class IngredientUpdateView(UpdateView):
+    model = Ingredient
+    form_class = IngredientForm
+    template_name = "edit_ingredient.html"
+    pk_url_kwarg = "ingredient_pk"
+    context_object_name = "ingredient"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(created_by=self.request.user)
+
+    def form_valid(self, form):
+        ingredient = form.save(commit=False)
+        ingredient.updated_at = timezone.now()
+        ingredient.save()
+        form.save_m2m()
+        return redirect("detail", recipe_pk=ingredient.pk)
+    
+    
+
+@method_decorator(login_required, name="dispatch")
+class IngredientDeleteView(DeleteView):
+    model = Ingredient
+    success_url = reverse_lazy('ingredients')
+    template_name = 'delete_ingredient.html'  # Change this to your desired template name
+    pk_url_kwarg = 'ingredient_pk'  # Adjust if your URL keyword is different
+
+    def get_object(self, queryset=None):
+        """Hook to ensure recipe is owned by the requesting user."""
+        obj = super().get_object()
+        if not obj.created_by == self.request.user:
+            raise Http404
+        return obj
