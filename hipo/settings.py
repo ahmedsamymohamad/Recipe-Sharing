@@ -137,7 +137,7 @@ LOGOUT_REDIRECT_URL = "home"
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "login"
 
-DEBUG = os.environ.get('DEBUG') != 'True'
+DEBUG = os.environ.get('DEBUG')== 'True'
 
 # allowed hosts
 ALLOWED_HOSTS = ['127.0.0.1',
