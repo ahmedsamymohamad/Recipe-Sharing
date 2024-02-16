@@ -60,5 +60,4 @@ urlpatterns = [
     path('recipe/<int:recipe_pk>/delete/', recipes_views.RecipeDeleteView.as_view(), name='recipe_delete'),
     path('ingredient/<int:ingredient_pk>/delete/', recipes_views.IngredientDeleteView.as_view(), name='delete_ingredient'),
     path('ingredients/', recipes_views.IngredientListView.as_view(), name='ingredients'),
-     path('', include('django_backblaze_b2.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
