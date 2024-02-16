@@ -150,4 +150,4 @@ EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 # allowed hosts
 ALLOWED_HOSTS = ['127.0.0.1',
                  'recpie-share.onrender.com',
-                 'recipe-sharing-yfs5kwh6n-ahmed-samys-projects-753187b5.vercel.app']
+                 '.vercel.app']
