@@ -41,10 +41,3 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
-class CacheEntry(models.Model):
-    key = models.CharField(max_length=255, unique=True)
-    value = models.TextField()
-    expiration = models.DateTimeField()
-
-    def __str__(self):
-        return self.key
