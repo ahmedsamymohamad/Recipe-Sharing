@@ -35,12 +35,15 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'cloudinary_storage',
     "django.contrib.staticfiles",
+    'cloudinary',
     "widget_tweaks",
     "recipes",
     "accounts",
     "interactions",
     "django_extensions",
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +154,12 @@ EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 ALLOWED_HOSTS = ['127.0.0.1',
                  'recpie-share.onrender.com',
                  '.vercel.app']
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+    'API_KEY': os.environ.get('API_KEY'),
+    'API_SECRET': os.environ.get('API_SECRET')
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

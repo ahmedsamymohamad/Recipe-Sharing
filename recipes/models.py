@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Avg
 
-
 class Recipe(models.Model):
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to='images/')
@@ -41,3 +40,11 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+
+class CacheEntry(models.Model):
+    key = models.CharField(max_length=255, unique=True)
+    value = models.TextField()
+    expiration = models.DateTimeField()
+
+    def __str__(self):
+        return self.key
