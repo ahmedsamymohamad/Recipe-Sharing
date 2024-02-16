@@ -11,7 +11,7 @@
                 <a class="text-dark" href="{% url 'detail' recipe.pk %}">{{ recipe.name }}</a>
               </h2>
               <a href="{% url 'detail' recipe.pk %}">
-                <img class="img-fluid mb-3" style="max-height:200px" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+                  <img class="img-fluid mb-3" style="max-height:200px" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
               </a>
               <p class="card-text">{{ recipe.description }}</p>
               <p class="mb-0">{{ recipe.created_at|date:"j/n/Y" }} · {{ recipe.get_avg_rate }}/5 ({{ recipe.rate_set.count }} Votes) ·  {{ recipe.like_set.count }} likes · by {{ recipe.created_by }}
