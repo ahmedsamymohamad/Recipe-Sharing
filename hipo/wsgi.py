@@ -21,3 +21,5 @@ static_root = os.path.join(BASE_DIR, 'staticfiles')
 
 # Wrap the Django application with WhiteNoise
 application = WhiteNoise(application, root=static_root)
+
+app = application
